@@ -22,8 +22,8 @@ STM32FLASH = ./stm32_flash.pl
 
 CFLAGS  =  -I. $(INC_DIRS) -O0 -g -Wall
 CFLAGS += -fdiagnostics-color
-#CFLAGS += -mcpu=cortex-m4 -mthumb -mlittle-endian -mthumb-interwork
-#CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16 
+CFLAGS += -mcpu=cortex-m4 -mthumb -mlittle-endian -mthumb-interwork
+CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16 
 CFLAGS += -nostartfiles 
 #CFLAGS += -ffreestanding  
 LFLAGS  = $(CFLAGS) -T$(LD_FILE) 
