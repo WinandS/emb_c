@@ -1,0 +1,268 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+__stm32_tick        0x4               obj/exceptions.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x0000000020000000 0x0000000000030000 xrw
+FLASH            0x0000000008000000 0x0000000000100000 xr
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD obj/low_level_init.o
+LOAD obj/exceptions.o
+LOAD obj/main.o
+LOAD obj/startup.o
+                0x0000000020020000                _estack = 0x20020000
+
+.text           0x0000000008000000      0x4ac
+ *(.isr_vector)
+ .isr_vector    0x0000000008000000      0x188 obj/startup.o
+                0x0000000008000000                g_pfnVectors
+ *(.text)
+ .text          0x0000000008000188      0x1e0 obj/low_level_init.o
+                0x0000000008000188                paint_stack
+                0x00000000080001d4                low_level_init
+ .text          0x0000000008000368       0x6c obj/exceptions.o
+                0x0000000008000368                NMI_Handler
+                0x0000000008000374                HardFault_Handler
+                0x000000000800037c                MemManage_Handler
+                0x0000000008000384                BusFault_Handler
+                0x000000000800038c                UsageFault_Handler
+                0x0000000008000394                SVC_Handler
+                0x00000000080003a0                DebugMon_Handler
+                0x00000000080003ac                PendSV_Handler
+                0x00000000080003b8                SysTick_Handler
+ .text          0x00000000080003d4       0x4c obj/main.o
+                0x00000000080003d4                main
+                0x0000000008000408                copyObject
+ .text          0x0000000008000420       0x14 obj/startup.o
+ *(.text*)
+ .text.Reset_Handler
+                0x0000000008000434       0x54 obj/startup.o
+                0x0000000008000434                Reset_Handler
+ .text.Default_Handler
+                0x0000000008000488        0x2 obj/startup.o
+                0x0000000008000488                RTC_Alarm_IRQHandler
+                0x0000000008000488                HASH_RNG_IRQHandler
+                0x0000000008000488                EXTI2_IRQHandler
+                0x0000000008000488                TIM8_CC_IRQHandler
+                0x0000000008000488                TIM1_CC_IRQHandler
+                0x0000000008000488                DMA2_Stream5_IRQHandler
+                0x0000000008000488                DMA1_Stream5_IRQHandler
+                0x0000000008000488                PVD_IRQHandler
+                0x0000000008000488                SDIO_IRQHandler
+                0x0000000008000488                TAMP_STAMP_IRQHandler
+                0x0000000008000488                CAN2_RX1_IRQHandler
+                0x0000000008000488                EXTI3_IRQHandler
+                0x0000000008000488                TIM8_TRG_COM_TIM14_IRQHandler
+                0x0000000008000488                TIM1_UP_TIM10_IRQHandler
+                0x0000000008000488                TIM8_UP_TIM13_IRQHandler
+                0x0000000008000488                I2C3_ER_IRQHandler
+                0x0000000008000488                EXTI0_IRQHandler
+                0x0000000008000488                I2C2_EV_IRQHandler
+                0x0000000008000488                DMA1_Stream2_IRQHandler
+                0x0000000008000488                CAN1_RX0_IRQHandler
+                0x0000000008000488                FPU_IRQHandler
+                0x0000000008000488                OTG_HS_WKUP_IRQHandler
+                0x0000000008000488                CAN2_SCE_IRQHandler
+                0x0000000008000488                DMA2_Stream2_IRQHandler
+                0x0000000008000488                SPI1_IRQHandler
+                0x0000000008000488                TIM6_DAC_IRQHandler
+                0x0000000008000488                TIM1_BRK_TIM9_IRQHandler
+                0x0000000008000488                DCMI_IRQHandler
+                0x0000000008000488                CAN2_RX0_IRQHandler
+                0x0000000008000488                DMA2_Stream3_IRQHandler
+                0x0000000008000488                USART6_IRQHandler
+                0x0000000008000488                USART3_IRQHandler
+                0x0000000008000488                CRYP_IRQHandler
+                0x0000000008000488                CAN1_RX1_IRQHandler
+                0x0000000008000488                UART5_IRQHandler
+                0x0000000008000488                DMA2_Stream0_IRQHandler
+                0x0000000008000488                TIM4_IRQHandler
+                0x0000000008000488                I2C1_EV_IRQHandler
+                0x0000000008000488                DMA1_Stream6_IRQHandler
+                0x0000000008000488                DMA1_Stream1_IRQHandler
+                0x0000000008000488                UART4_IRQHandler
+                0x0000000008000488                TIM3_IRQHandler
+                0x0000000008000488                RCC_IRQHandler
+                0x0000000008000488                TIM8_BRK_TIM12_IRQHandler
+                0x0000000008000488                Default_Handler
+                0x0000000008000488                EXTI15_10_IRQHandler
+                0x0000000008000488                ADC_IRQHandler
+                0x0000000008000488                DMA1_Stream7_IRQHandler
+                0x0000000008000488                TIM7_IRQHandler
+                0x0000000008000488                CAN2_TX_IRQHandler
+                0x0000000008000488                TIM5_IRQHandler
+                0x0000000008000488                DMA2_Stream7_IRQHandler
+                0x0000000008000488                I2C3_EV_IRQHandler
+                0x0000000008000488                EXTI9_5_IRQHandler
+                0x0000000008000488                RTC_WKUP_IRQHandler
+                0x0000000008000488                ETH_WKUP_IRQHandler
+                0x0000000008000488                SPI2_IRQHandler
+                0x0000000008000488                OTG_HS_EP1_IN_IRQHandler
+                0x0000000008000488                DMA1_Stream0_IRQHandler
+                0x0000000008000488                CAN1_TX_IRQHandler
+                0x0000000008000488                EXTI4_IRQHandler
+                0x0000000008000488                FSMC_IRQHandler
+                0x0000000008000488                ETH_IRQHandler
+                0x0000000008000488                OTG_HS_EP1_OUT_IRQHandler
+                0x0000000008000488                WWDG_IRQHandler
+                0x0000000008000488                TIM2_IRQHandler
+                0x0000000008000488                OTG_FS_WKUP_IRQHandler
+                0x0000000008000488                TIM1_TRG_COM_TIM11_IRQHandler
+                0x0000000008000488                OTG_HS_IRQHandler
+                0x0000000008000488                EXTI1_IRQHandler
+                0x0000000008000488                USART2_IRQHandler
+                0x0000000008000488                I2C2_ER_IRQHandler
+                0x0000000008000488                DMA2_Stream1_IRQHandler
+                0x0000000008000488                CAN1_SCE_IRQHandler
+                0x0000000008000488                FLASH_IRQHandler
+                0x0000000008000488                DMA2_Stream4_IRQHandler
+                0x0000000008000488                USART1_IRQHandler
+                0x0000000008000488                OTG_FS_IRQHandler
+                0x0000000008000488                SPI3_IRQHandler
+                0x0000000008000488                DMA1_Stream4_IRQHandler
+                0x0000000008000488                I2C1_ER_IRQHandler
+                0x0000000008000488                DMA2_Stream6_IRQHandler
+                0x0000000008000488                DMA1_Stream3_IRQHandler
+ *fill*         0x000000000800048a        0x6 
+ .text.Default_Handler.__stub
+                0x0000000008000490       0x10 linker stubs
+ *(.rodata)
+ *fill*         0x00000000080004a0        0x0 
+ .rodata        0x00000000080004a0        0xc obj/main.o
+ *(.rodata*)
+                0x00000000080004ac                _sidata = LOADADDR (.data)
+
+.glue_7         0x00000000080004ac        0x0
+ .glue_7        0x00000000080004ac        0x0 linker stubs
+
+.glue_7t        0x00000000080004ac        0x0
+ .glue_7t       0x00000000080004ac        0x0 linker stubs
+
+.vfp11_veneer   0x00000000080004ac        0x0
+ .vfp11_veneer  0x00000000080004ac        0x0 linker stubs
+
+.v4_bx          0x00000000080004ac        0x0
+ .v4_bx         0x00000000080004ac        0x0 linker stubs
+
+.iplt           0x00000000080004ac        0x0
+ .iplt          0x00000000080004ac        0x0 obj/low_level_init.o
+
+.data           0x0000000020000000       0x14 load address 0x00000000080004ac
+                0x0000000020000000                . = ALIGN (0x4)
+                0x0000000020000000                _sdata = .
+ *(.data)
+ .data          0x0000000020000000       0x14 obj/low_level_init.o
+                0x0000000020000000                SystemCoreClock
+                0x0000000020000004                AHBPrescTable
+ .data          0x0000000020000014        0x0 obj/exceptions.o
+ .data          0x0000000020000014        0x0 obj/main.o
+ .data          0x0000000020000014        0x0 obj/startup.o
+ *(.data*)
+                0x0000000020000014                . = ALIGN (0x4)
+                0x0000000020000014                _edata = .
+
+.igot.plt       0x0000000020000014        0x0 load address 0x00000000080004c0
+ .igot.plt      0x0000000020000014        0x0 obj/low_level_init.o
+
+.bss            0x0000000020000014        0x4 load address 0x00000000080004c0
+                0x0000000020000014                . = ALIGN (0x4)
+                0x0000000020000014                _sbss = .
+                0x0000000020000014                __bss_start__ = _sbss
+ *(.bss)
+ .bss           0x0000000020000014        0x0 obj/low_level_init.o
+ .bss           0x0000000020000014        0x0 obj/exceptions.o
+ .bss           0x0000000020000014        0x0 obj/main.o
+ .bss           0x0000000020000014        0x0 obj/startup.o
+ *(.bss*)
+ *(COMMON)
+ COMMON         0x0000000020000014        0x4 obj/exceptions.o
+                0x0000000020000014                __stm32_tick
+                0x0000000020000018                . = ALIGN (0x4)
+                0x0000000020000018                _ebss = .
+                0x0000000020000018                __bss_end__ = _ebss
+                0x0000000020000018                _end = .
+                [!provide]                        PROVIDE (end, .)
+
+.fastcode       0x0000000020000018       0x1c load address 0x00000000080004c0
+                0x0000000020000018                . = ALIGN (0x4)
+                0x00000000080004c0                __fastcode_load = LOADADDR (.fastcode)
+                0x0000000020000018                __fastcode_start = .
+ *(.fastcode)
+ .fastcode      0x0000000020000018       0x1c obj/main.o
+                0x0000000020000018                fast_increment
+ *(.fastcode*)
+                0x0000000020000034                . = ALIGN (0x4)
+                0x0000000020000034                __fastcode_end = .
+OUTPUT(out/main.elf elf32-littlearm)
+
+.rel.dyn        0x0000000020000034        0x0 load address 0x00000000080004dc
+ .rel.iplt      0x0000000020000034        0x0 obj/low_level_init.o
+
+.debug_info     0x0000000000000000      0x8f2
+ .debug_info    0x0000000000000000      0x5e8 obj/low_level_init.o
+ .debug_info    0x00000000000005e8      0x144 obj/exceptions.o
+ .debug_info    0x000000000000072c      0x141 obj/main.o
+ .debug_info    0x000000000000086d       0x85 obj/startup.o
+
+.debug_abbrev   0x0000000000000000      0x313
+ .debug_abbrev  0x0000000000000000      0x184 obj/low_level_init.o
+ .debug_abbrev  0x0000000000000184       0x78 obj/exceptions.o
+ .debug_abbrev  0x00000000000001fc      0x105 obj/main.o
+ .debug_abbrev  0x0000000000000301       0x12 obj/startup.o
+
+.debug_aranges  0x0000000000000000       0x90
+ .debug_aranges
+                0x0000000000000000       0x20 obj/low_level_init.o
+ .debug_aranges
+                0x0000000000000020       0x20 obj/exceptions.o
+ .debug_aranges
+                0x0000000000000040       0x28 obj/main.o
+ .debug_aranges
+                0x0000000000000068       0x28 obj/startup.o
+
+.debug_line     0x0000000000000000      0x2df
+ .debug_line    0x0000000000000000      0x113 obj/low_level_init.o
+ .debug_line    0x0000000000000113       0xbd obj/exceptions.o
+ .debug_line    0x00000000000001d0       0x9e obj/main.o
+ .debug_line    0x000000000000026e       0x71 obj/startup.o
+
+.debug_str      0x0000000000000000      0x4d0
+ .debug_str     0x0000000000000000      0x3d4 obj/low_level_init.o
+                                        0x41f (size before relaxing)
+ .debug_str     0x00000000000003d4       0xae obj/exceptions.o
+                                        0x243 (size before relaxing)
+ .debug_str     0x0000000000000482       0x4e obj/main.o
+                                        0x1e2 (size before relaxing)
+
+.comment        0x0000000000000000       0x38
+ .comment       0x0000000000000000       0x38 obj/low_level_init.o
+                                         0x39 (size before relaxing)
+ .comment       0x0000000000000038       0x39 obj/exceptions.o
+ .comment       0x0000000000000038       0x39 obj/main.o
+
+.ARM.attributes
+                0x0000000000000000       0x37
+ .ARM.attributes
+                0x0000000000000000       0x39 obj/low_level_init.o
+ .ARM.attributes
+                0x0000000000000039       0x39 obj/exceptions.o
+ .ARM.attributes
+                0x0000000000000072       0x39 obj/main.o
+ .ARM.attributes
+                0x00000000000000ab       0x21 obj/startup.o
+
+.debug_frame    0x0000000000000000      0x234
+ .debug_frame   0x0000000000000000       0xa4 obj/low_level_init.o
+ .debug_frame   0x00000000000000a4      0x110 obj/exceptions.o
+ .debug_frame   0x00000000000001b4       0x80 obj/main.o
+
+.debug_ranges   0x0000000000000000       0x38
+ .debug_ranges  0x0000000000000000       0x18 obj/main.o
+ .debug_ranges  0x0000000000000018       0x20 obj/startup.o
