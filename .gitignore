@@ -3,4 +3,5 @@
 *.bin
 *.lst
 *.map
-
+**/obj/
+**/out/
